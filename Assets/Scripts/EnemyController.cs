@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, target.transform.position) > radius)
         {
-            Debug.Log("Walking");
+            //Debug.Log("Walking");
 
             animator.SetBool("IsRunning", false);
             time += 1 * Time.deltaTime;
@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Running");
+            //Debug.Log("Running");
 
             var lookPos = target.transform.position - transform.position;
             lookPos.y = 0;
