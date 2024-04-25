@@ -8,6 +8,10 @@ public class EnemyDamageController : MonoBehaviour
     [SerializeField]
     float damage;
 
+    public float cooldownTime = 2f;
+    private bool canDamage = true;
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +21,16 @@ public class EnemyDamageController : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
+                StartCoroutine(Cooldown());
             }
         }
     }
+
+    private IEnumerator Cooldown()
+    {
+        canDamage = false;
+        yield return new WaitForSeconds(cooldownTime);
+        canDamage = true;
+    }
+
 }

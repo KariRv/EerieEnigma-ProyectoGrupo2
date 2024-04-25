@@ -10,13 +10,19 @@ public class CollectController : MonoBehaviour
     public TextMeshProUGUI scoreText;
     private int collectables = 0;
 
+    public AudioSource audioSource;
+    public AudioClip recogerSonido;
+    public float volumen = 1f;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Collectable"))
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject , 2f);
             collectables++;
+            
             UpdateCollectableText();
+            audioSource.PlayOneShot(recogerSonido, volumen);
         }
 
         if (collectables == 5)
@@ -34,4 +40,7 @@ public class CollectController : MonoBehaviour
             scoreText.text = "Artefactos: " + collectables.ToString() + "/5";
         }
     }
+
+    
+
 }

@@ -7,6 +7,8 @@ TagManager:
   - CinemachineTarget
   - InteractiveObject
   - Collectable
+  - Enemy
+  - HealthCollectable
   layers:
   - Default
   - TransparentFX

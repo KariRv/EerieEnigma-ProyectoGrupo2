@@ -14,15 +14,34 @@ public class EnemyController : MonoBehaviour
     public float grade;
     public float radius = 8.0f;
 
+    public AudioClip Steps;
+    public AudioClip Rite;
+
+    private AudioSource enemySound;
+
     public GameObject target;
+
+
+    private bool habilitarSonido = true;
+    private float cooldownSonido = 3.0f;
+    private float tiempoSonido = 0.0f;
+
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        enemySound = GetComponent<AudioSource>();
     }
 
     public void enemyBehavior()
     {
+        
+        
+
+
+
+
         if (Vector3.Distance(transform.position, target.transform.position) > radius)
         {
             //Debug.Log("Walking");
@@ -50,6 +69,27 @@ public class EnemyController : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, angle, 0.5F);
                     transform.Translate(Vector3.forward * 1 * Time.deltaTime);
                     animator.SetBool("IsWalking", true);
+
+                    if (!habilitarSonido)
+                    {
+                        tiempoSonido -= Time.deltaTime;
+                        if (tiempoSonido <= 0)
+                        {
+                            habilitarSonido = true;
+                        }
+                    }
+
+
+                    if (habilitarSonido)
+                    {
+                        // Reproducir el sonido
+                        enemySound.PlayOneShot(Rite, 2.0f);
+
+                        // Establecer el cooldown del sonido
+                        habilitarSonido = false;
+                        tiempoSonido = cooldownSonido;
+                    }
+
                     break;
             }
         }

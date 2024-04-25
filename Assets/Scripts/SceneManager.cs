@@ -6,6 +6,7 @@ public class SceneManager : MonoBehaviour
     public void StartGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Map_Hospital");
+        Cursor.visible = false;
     }
 
     public void CloseGame()
